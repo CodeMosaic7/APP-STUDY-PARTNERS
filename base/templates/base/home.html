@@ -1,0 +1,17 @@
+{%extends 'index.html' %}
+<!-- This is template inheritance. Here navbar is inherited from navbar.html -->
+{% block content %}
+<h1>HOME</h1>
+
+<div>
+    <div>
+        {% for room in rooms %}
+        <div>
+            <h4>{{room.id}}--<a href="{% url 'room' room.id%}">{{room.name}}</a></h4>
+            <!-- This tag will generate unique url for each page. -->
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

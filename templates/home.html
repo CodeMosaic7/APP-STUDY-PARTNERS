@@ -1,0 +1,16 @@
+{%extends 'index.html' %}
+<!-- This is template inheritance. Here navbar is inherited from navbar.html -->
+{% block content %}
+<h1>HOME</h1>
+
+<div>
+    <div>
+        {% for room in rooms %}
+        <div>
+            <h4>{{room.id}}--{{room.name}}</h4>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
