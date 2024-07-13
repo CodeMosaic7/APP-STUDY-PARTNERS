@@ -4,13 +4,16 @@
 <h1>HOME</h1>
 
 <div>
+    <a href="{% url 'create-room'%}">Create Room</a>
     <div>
+        
         {% for room in rooms %}
+        <span>@{{room.host.username}}</span>
         <div>
             <h4>{{room.id}}--<a href="{% url 'room' room.id%}">{{room.name}}</a></h4>
             <!-- This tag will generate unique url for each page. -->
         </div>
-
+        <small>{{room.topic.name}}</small>
         {% endfor %}
     </div>
 </div>
