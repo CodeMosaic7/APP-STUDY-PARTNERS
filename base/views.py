@@ -25,3 +25,17 @@ def createRoom(request):
         # if values are valid save in the database.
     context={'form':form}
     return render(request, 'base/room_form.html',context)
+
+# View to edit room properties
+def updateRoom(request,pk):
+    room =Room.objects.get(id=pk)
+    form=RoomForm(instance=room)
+    #this condition redirect the user back to home on submission.  
+    if request.method=='POST':
+        form= RoomForm(request.POST,instance=room)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+    context={'form':form}
+    return render(request, 'base/room_form.html',context)
