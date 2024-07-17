@@ -12,6 +12,7 @@ from .forms import RoomForm
 # Create your views here.
 
 def loginPage(request):
+    page='login'
     if request.user.is_authenticated:
         return redirect('home')
     if request.method=='POST':
@@ -33,17 +34,18 @@ def loginPage(request):
          # Redirect to a success page.
         else:
             messages.error(request,'Username or password is incorrect')
-    
-            
-
-    context={}
+    context={'page':page}
     return render(request, 'base/login_register.html',context)
 
 def logoutUser(request):
     logout(request)
     return redirect('home')
     
+def registerPage(request):
+    page='register'
+    return render('base/login_register.html')
 
+    
 def home(request):
     q=request.GET.get('q') if request.GET.get('q')!=None else ''
     rooms=Room.objects.filter(Q(topic__name__icontains=q)| Q(name__icontains=q) | Q(description__icontains=q))
