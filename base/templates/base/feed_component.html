@@ -1,0 +1,21 @@
+<a href="{% url 'create-room'%}">Create Room</a><br>
+{% for room in rooms %}
+{%if request.user == room.host%}
+<a href="{% url 'update-room' room.id %}">
+    Edit Room
+</a>
+<a href="{% url 'delete-room' room.id %}">
+    Delete Room
+</a>
+{%endif%}
+<div>
+    <a href="{%url 'user-profile' room.host.id %}"><span>@{{room.host.username}}</span></a>
+    <div>
+        <h4>{{room.id}}--<a href="{% url 'room' room.id%}">{{room.name}}</a></h4>
+        <!-- This tag will generate unique url for each page. -->
+    </div>
+    <small>{{room.topic.name}}</small>
+    <hr>
+</div>
+
+{% endfor %}

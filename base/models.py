@@ -15,7 +15,7 @@ class Room(models.Model):
     name=models.CharField(max_length=200)
     description= models.TextField(null=True, blank=True) 
     # () cannot be blank otherwise the table cannot have any value.
-    # participants=
+    participants=models.ManyToManyField(User,related_name='participants',blank=True)
     updated=models.DateTimeField(auto_now=True)
     # whenever save method is called, take a snapshot of the table at that instance, automatically. auto_now takes a snapshot everytime table is saved.TIME ROOM IS UPDATED
     created= models.DateTimeField(auto_now_add=True)
@@ -39,3 +39,5 @@ class Message(models.Model):
     # this takes a snapshot time when the table is created.so it will never change. TIME WHEN THE ROOM IS CREATED
     def __str__(self):
         return self.body[0:50]
+    class Meta:
+        ordering=['-updated','-created']
